@@ -14,19 +14,19 @@ class ContaBancaria
     Saldo = 0.00;
   }
 
-  public ContaBancaria(int numero, string titular, double saldo) : this(numero, titular)
+  public ContaBancaria(int numero, string titular, double depositoInicial) : this(numero, titular)
   {
-    Saldo = saldo < 0 ? 0 : saldo;
+    Depositar(depositoInicial);
   }
 
   public void Depositar(double valor)
   {
-    this.Saldo += valor;
+    this.Saldo += valor < 0 ? this.Saldo : valor;
   }
 
   public void Sacar(double valor)
   {
-    this.Saldo = (this.Saldo - valor) - TAXA;
+    this.Saldo = valor < 0 ? this.Saldo : (this.Saldo - valor) - TAXA;
   }
 
   public override string ToString()
